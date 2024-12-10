@@ -1,0 +1,143 @@
+#include<iostream>
+using namespace std;
+
+
+struct node{
+    int data;
+    struct node*next;
+};
+//INSERT AT BEGINGING
+struct node* insertionAtbegin(struct node*head,int val){
+
+    struct node*p=(struct node*)malloc(sizeof(struct node));
+    p->data=val;
+    p->next=head;
+    head=p;
+    
+}
+//INSERT AT INDEX
+struct node*insertAtindex(struct node*head,int value,int index){
+    
+    struct node*p=head;
+    int i=0;
+    while(i!=index-1){
+        p=p->next;
+        i++;
+
+    }
+    struct node*ptr=new node;
+    ptr->data=value;
+    ptr->next=p->next;
+    p->next=ptr;
+    return head;
+
+
+}
+//INSERT AT END
+struct node*insertAtend(struct node*head,int value){
+    struct node*p=head;
+    struct node*ptr=new node;
+    int i=0;
+    while(p->next!=NULL){
+        p=p->next;
+    
+    }
+    ptr->data=value;
+    ptr->next=NULL;
+    p->next=ptr;
+    return head;
+}
+
+struct node*insertafter(struct node*head,struct node*q,int value){
+    struct node*p=head;
+    struct node*ptr=new node;
+    ptr->data=value;
+    ptr->next=q->next;
+    q->next=ptr;
+    return head;
+    
+    
+}
+struct node* deletefirst(struct node*head){
+    struct node*p=head;
+    head=head->next;
+    delete p;
+    return head;
+}
+
+struct node*deleteAtindex(struct node*head,int index){
+    struct node*p=head;
+    struct node*q=head->next;
+    for(int i=0;i<index-1;i++){
+        p=p->next;
+        q=q->next;
+    }
+
+    p->next=q->next;
+
+    delete q;
+    return head;
+
+    
+}
+
+struct node*deleteAtlast(struct node*head){
+    struct node*p=head;
+    struct node*q=head->next;
+    while(q->next!=NULL){
+        p=p->next;
+        q=q->next;
+    }
+
+    p->next=NULL;
+    delete q;
+    return head;
+     
+}
+
+struct node*deletebyvalue(struct node*head,int value){
+    struct node*p=head;
+    struct node*q=head->next;
+    while(q->data!=value){
+        p=p->next;
+        q=q->next;
+
+    }
+    p->next=q->next;
+    delete q;
+    return head;
+}
+
+
+
+void printlinklist(struct node*ptr)
+{
+    while(ptr->next!=NULL){
+        cout<<"\t"<<ptr->data;
+        ptr=ptr->next;
+
+    }
+    cout<<"\t"<<ptr->data;
+}
+int main(){
+    struct node* head=(struct node*)malloc(sizeof(struct node));
+
+    struct node *second=(struct node*)malloc(sizeof(struct node));
+    struct node *third=(struct node*)malloc(sizeof(struct node));
+    head->data=89;
+    head->next=second;
+    second->data=66;
+    second->next=third;
+    third->data=23;
+    third->next=NULL;
+    int value=88;
+
+   
+
+
+insertafter(head,second,value);
+printlinklist(head);
+
+
+
+}
